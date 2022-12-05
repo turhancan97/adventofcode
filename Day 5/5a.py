@@ -8,26 +8,26 @@ with open('stack.txt', 'r', encoding="utf-8") as f: # Open the file
     S = [[] for _ in range(N)]
     
     # To save each colums of a stack to a list
-    for i in range(N-1):
-        line = stack[i]
-        crates = line[1::4]
-        for s in range(len(crates)):
-            if crates[s] != " ":
-                S[s].append(crates[s])
+    for i in range(N-1): # N-1 because the last line is empty
+        line = stack[i] # Get the line
+        crates = line[1::4] # Get the crates
+        for s in range(len(crates)): # For each crate
+            if crates[s] != " ": # If the crate is not empty
+                S[s].append(crates[s]) # Add the crate to the list
 
     # Reverse all stacks
-    stacks = [stack[::-1] for stack in S]
+    stacks = [stack[::-1] for stack in S] 
 
     # Move crates one by one
-    for line in stack[N+1:]:
-        tokens = line.split(" ")
-        n, src, dst = map(int, [tokens[1], tokens[3], tokens[5]])
-        src -= 1
-        dst -= 1
+    for line in stack[N+1:]: # N+1 because the first N lines are the stacks
+        tokens = line.split(" ") # Split the line
+        n, src, dst = map(int, [tokens[1], tokens[3], tokens[5]]) # Get the number of crates, the source, and the destination
+        src -= 1 # Subtract 1 because the stacks are 0-indexed
+        dst -= 1 # Subtract 1 because the stacks are 0-indexed
 
-        for _ in range(n):
-            pop = stacks[src].pop()
-            stacks[dst].append(pop)
+        for _ in range(n): # For each crate
+            pop = stacks[src].pop() # Pop the crate from the source
+            stacks[dst].append(pop) # Add the crate to the destination
     
-    tops = [stack[-1] for stack in stacks]
-    print("".join(tops))
+    tops = [stack[-1] for stack in stacks] # Get the top of each stack
+    print("".join(tops)) # Print the top of each stack
