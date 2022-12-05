@@ -18,7 +18,7 @@ with open('stack.txt', 'r', encoding="utf-8") as f: # Open the file
     # Reverse all stacks
     stacks = [stack[::-1] for stack in S]
 
-    # Move things around
+    # Move crates one by one
     for line in stack[N+1:]:
         tokens = line.split(" ")
         n, src, dst = map(int, [tokens[1], tokens[3], tokens[5]])
