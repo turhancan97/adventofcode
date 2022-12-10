@@ -2,7 +2,7 @@ with open('instructions.txt', 'r', encoding="utf-8") as f: # Open the file
     lines = f.readlines() # Read the lines of the file
     lines = [line.strip() for line in lines] # Remove the newline character from each line
     
-G = [['?' for _ in range(40)] for _ in range(6)]
+G = [['-' for _ in range(40)] for _ in range(6)]
 ans = 0
 x = 1
 cycle = 0
