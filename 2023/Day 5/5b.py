@@ -1,11 +1,14 @@
+# Open the file and read all lines
 with open("almanac.txt", "r") as file:
     lines = file.readlines()
 
-seeds = []
-for i in lines[0].strip().split(": ")[1].split(" "):
-    seeds.append(int(i))
+# Extract the seeds from the first line
+seeds = [int(i) for i in lines[0].strip().split(": ")[1].split(" ")]
 
+# Initialize an empty list for mappings
 mappings = []
+
+# Loop through the rest of the lines to extract mappings
 for line in lines[2:]:
     line = line.strip()
     if line.endswith(":"):
@@ -13,7 +16,10 @@ for line in lines[2:]:
     elif len(line) > 0:
         mappings[-1].append([int(i) for i in line.split(" ")])
 
+# Initialize the result with a large number
 res = 2**64
+
+# Loop through each pair of seeds
 for s, o in zip(seeds[::2], seeds[1::2]):
     ranges = [(s, s + o - 1)]
     for typemappings in mappings:
@@ -37,12 +43,12 @@ for s, o in zip(seeds[::2], seeds[1::2]):
                     newranges.append((md, md + mo - 1))
                     ranges.append((ms + mo, h))
                     found = True
-                if found == True:
+                if found:
                     break
-            if found == False:
+            if not found:
                 newranges.append((l, h))
         ranges = newranges.copy()
     res = min(res, min(ranges)[0])
-print(
-    "Lowest location number that corresponds to any of the initial seed numbers?", res
-)
+
+# Print the result
+print("Lowest location number that corresponds to any of the initial seed numbers?", res)
