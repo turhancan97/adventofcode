@@ -15,7 +15,7 @@ for key in record_dict:
     for i in range(len(record_dict[key])):
         record_dict[key][i] = int(record_dict[key][i])
 
-count = 0  # count the number of recordsx
+count = 0  # count the number of records
 record_list = []  # store the records
 for value in range(len(record_dict["Time:"])):
     for hold in range(0, record_dict["Time:"][value] + 1):
